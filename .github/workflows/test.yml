@@ -18,7 +18,7 @@ jobs:
       - name: Extract coverage
         id: extract_coverage
         if: ${{ success() || failure() }}
-        uses: brunotoshio/python-coverage-action@v0.1.10
+        uses: brunotoshio/python-coverage-action@v0.2.2
         with:
           filepath: test/components/api/src/coverage.json
       - name: Publish coverage
