@@ -18,11 +18,9 @@ jobs:
       - name: Extract coverage
         id: extract_coverage
         if: ${{ success() || failure() }}
-        uses: brunotoshio/python-coverage-action@v0.1.8
+        uses: brunotoshio/python-coverage-action@v0.1.9
         with:
           filepath: ./test/components/api/scr/coverage.json
-        env:
-          INPUT_FILEPATH: ./test/components/api/scr/coverage.json
       - name: Publish coverage
         uses: mshick/add-pr-comment@v1
         with:
