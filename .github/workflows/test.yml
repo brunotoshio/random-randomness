@@ -20,7 +20,7 @@ jobs:
         if: ${{ success() || failure() }}
         uses: brunotoshio/python-coverage-action@v0.1.4
         with:
-          file_path: ./test/components/api/src/coverage.json
+          file_path: coverage.json
       - name: Publish coverage
         uses: mshick/add-pr-comment@v1
         with:
