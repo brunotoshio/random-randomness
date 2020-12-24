@@ -31,7 +31,7 @@ jobs:
         env:
           COVERAGE: ${{ steps.extract_coverage.outputs.passed }}
         run: |
-          if [ $COVERAGE -eq 'true' ]
+          if [ $COVERAGE = 'true' ]
           then
             echo "::set-output name=result:success"
           else
