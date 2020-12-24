@@ -33,13 +33,13 @@ jobs:
         run: |
           if [$COVERAGE == 'true']
           then
-            echo "::set-output name=status:success"
+            echo "::set-output name=result:success"
           else
-            echo "::set-output name=status:failure"
+            echo "::set-output name=result:failure"
           fi
       - uses: LouisBrunner/checks-action@v1.1.1
         if: always()
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           name: Allow to merge
-          conclusion: ${{ steps.allow_merge.outputs.status }}
+          conclusion: ${{ steps.allow_merge.outputs.result }}
