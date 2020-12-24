@@ -18,7 +18,7 @@ jobs:
       - name: Extract coverage
         id: extract_coverage
         if: ${{ success() || failure() }}
-        uses: brunotoshio/python-coverage-action@v0.2.3
+        uses: brunotoshio/python-coverage-action@v0.3.0
         with:
           filepath: test/components/api/src/coverage.json
       - name: Publish coverage
@@ -26,3 +26,11 @@ jobs:
         with:
           message: ${{ steps.extract_coverage.outputs.result }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: LouisBrunner/checks-action@v1.1.1
+        if: always()
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: Allow to merge
+          conclusion: ${{ steps.extract_coverage.outputs.passed }}
+          output: |
+            {"summary":${{ steps.test.outputs.summary }}}
