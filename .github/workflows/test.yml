@@ -31,7 +31,7 @@ jobs:
         env:
           COVERAGE: ${{ steps.extract_coverage.outputs.passed }}
         run: |
-          if [$COVERAGE == 'true']
+          if [ $COVERAGE == 'true' ]
           then
             echo "::set-output name=result:success"
           else
@@ -40,6 +40,6 @@ jobs:
       - uses: LouisBrunner/checks-action@v1.1.1
         if: always()
         with:
+          conclusion: ${{ steps.allow_merge.outputs.result }}
           token: ${{ secrets.GITHUB_TOKEN }}
           name: Allow to merge
-          conclusion: ${{ steps.allow_merge.outputs.result }}
