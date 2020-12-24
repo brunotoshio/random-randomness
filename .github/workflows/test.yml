@@ -26,11 +26,20 @@ jobs:
         with:
           message: ${{ steps.extract_coverage.outputs.result }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Allow to merge
+        id: allow_merge
+        env:
+          COVERAGE: ${{ steps.extract_coverage.outputs.passed }}
+        run: |
+          if [$COVERAGE == 'true']
+          then
+            echo "::set-output name=status:success"
+          else
+            echo "::set-output name=status:failure"
+          fi
       - uses: LouisBrunner/checks-action@v1.1.1
         if: always()
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           name: Allow to merge
-          conclusion: ${{ steps.extract_coverage.outputs.passed }}
-          output: |
-            {"summary":${{ steps.test.outputs.summary }}}
+          conclusion: ${{ steps.allow_merge.outputs.status }}
